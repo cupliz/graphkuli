@@ -20,9 +20,9 @@ function createMap(tableData) {
 
 function eachMap(tableData) {
   let map = {}
+  map.aliases = {}
   map.name = _.camelCase(tableData[0].table_name)
   map.table = tableData[0].table_name
-  map.aliases = {}
   for (let i = 0; i < tableData.length; i++) {
     let row = tableData[i]
     let columnNameCamelCase = _.camelCase(row.column_name)

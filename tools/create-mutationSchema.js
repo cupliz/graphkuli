@@ -27,6 +27,7 @@ function createMutationSchema(tableData) {
   codeResolver += `  },\n}\n`
   codeResolver += `Object.assign(resolver.Mutation, customResolver)\n`
   code = code+codeQuery+codeResolver+`export default { schema, resolver }`
+  
   let outputMutationSchema = path.resolve(path.join(config.outputDir, 'src', 'mutation-schema.js'))
   fse.ensureFileSync(outputMutationSchema)
   fse.writeFileSync(outputMutationSchema, code);

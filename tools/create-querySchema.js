@@ -16,7 +16,6 @@ function createQuerySchema(tableData) {
     let tableUpper = _.upperFirst(tableName)
     codeQuery += `  ${tableName}(${'${args}'}, filter: ${tableUpper+'Filter'}): [${tableUpper}]\n`
   }
-  
   codeQuery += `}\ninput QueryOperator{`
   codeQuery += `\n  like: String\n  lt: String\n  lte: String\n  gt: String\n  gte: String\n  in: String\n  notin: String\n`
   codeQuery += `}${'` + customSchema'}\n`

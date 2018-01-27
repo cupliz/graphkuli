@@ -18,10 +18,8 @@ export function resolveQuery(schema) {
       let alias = getAlias(typeData.aliases, val)
       if (alias) select.push(alias + ' AS ' + typeData.aliases[alias])
     }
-
     query = db().select(select).from(typeData.table)
     getQueryArgs(query, args, typeData)
-
 
     if (root) {
       let parentName = info.parentType['name']
@@ -37,6 +35,7 @@ export function resolveQuery(schema) {
         query = query.where(refKey, root[parentPK])
       }
     }
+
     // if (config.env == 'dev') console.log(query.toSQL().sql, query.toSQL().bindings, ' \n')
     return query.catch(handleError).then(function(result) {
       return info.returnType['ofType'] ? result : result[0]
