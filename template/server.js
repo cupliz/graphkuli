@@ -1,0 +1,32 @@
+import express from 'express'
+import path from 'path'
+import favicon from 'serve-favicon'
+import expressGraphQL from 'express-graphql'
+import { makeExecutableSchema } from 'graphql-tools';
+
+import config from './src/config'
+import mutation from './src/mutation-schema'
+import query from './src/query-schema'
+import types from './src/type/index'
+
+let typeDefs = types + query.schema + mutation.schema
+let resolvers = Object.assign(query.resolver, mutation.resolver)
+
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+});
+
+const app = express()
+app.set('port', process.env.PORT || config.port)
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use('/graphql', expressGraphQL({
+  schema: schema,
+  graphiql: true,
+}))
+app.use(function (req, res, next) {
+  res.status('404').sendFile(path.join(__dirname, 'public', '404.html'))
+})
+app.listen(app.get('port'), () => {
+  console.log('GraphiQL server listening on port ' + app.get('port'))
+})

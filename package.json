@@ -1,0 +1,20 @@
+{
+  "name": "graphkuli",
+  "version": "0.1.9",
+  "description": "GraphQL custom framework",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Iyan Cupliz",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.0",
+    "fs-extra": "^5.0.0",
+    "knex": "^0.14.2",
+    "lodash": "^4.17.4",
+    "mysql": "^2.15.0",
+    "pg": "^7.4.1",
+    "sqlite3": "^3.1.13"
+  }
+}
