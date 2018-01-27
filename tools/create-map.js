@@ -8,7 +8,7 @@ function createMap(tableData) {
   let code = ``
   for (var i = 0; i < tableData.length; i++) {
     let map = eachMap(tableData[i])
-    structure[map.name] = map
+    structure[_.upperFirst(map.name)] = map
   }
   code += `const map = ${JSON.stringify(structure, null, 2)}`
   code += `\nexport default map `

@@ -5,7 +5,7 @@ import tableMap from './structure';
 var immut = {}
 
 export function resolveQuery(schema) {
-  // console.log('\x1Bc');
+  // if (config.env == 'dev') console.log('\x1Bc');
   return (root, args, ast, info) => {
     const typeData = tableMap[schema]
     if (!typeData) {
@@ -24,24 +24,20 @@ export function resolveQuery(schema) {
 
 
     if (root) {
-      // console.log(schema, Object.keys(info.parentType), info.parentType['_fields'])
-      let parentName = info.parentType['name'].toLowerCase()
-      if (Object.keys(typeData.referenceMap).length > 0) {
-        let parent = tableMap[parentName]
+      let parentName = info.parentType['name']
+      let parent = tableMap[parentName]
+      if (Object.keys(typeData.referenceMap).length <= 0 || typeData.table !== parent.table) {
+        let schemaPK = keyAlias(typeData.aliases, typeData.primaryKey)
+        let refKey = getAlias(parent.referenceMap, typeData.table)
+        let parentFK = parent.aliases[refKey]
+        query = query.where(schemaPK, root[parentFK])
+      } else {
         let parentPK = parent.aliases[parent.primaryKey]
         let refKey = getAlias(typeData.referenceMap, parent.table)
         query = query.where(refKey, root[parentPK])
-        // if (config.env == 'dev') console.log(1, schema)
-      } else {
-        let schemaPK = keyAlias(typeData.aliases, typeData.primaryKey)
-        let parent = tableMap[parentName]
-        let refKey = getAlias(parent.referenceMap, schema)
-        let parentFK = parent.aliases[refKey]
-        query = query.where(schemaPK, root[parentFK])
-        // if (config.env == 'dev') console.log(2, schema)
       }
     }
-    if (config.env == 'dev') console.log(query.toSQL().sql, query.toSQL().bindings, ' \n')
+    // if (config.env == 'dev') console.log(query.toSQL().sql, query.toSQL().bindings, ' \n')
     return query.catch(handleError).then(function(result) {
       return info.returnType['ofType'] ? result : result[0]
     })

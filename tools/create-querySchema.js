@@ -26,7 +26,7 @@ function createQuerySchema(tableData) {
   for (var i = 0; i < tableData.length; i++) {
     let tableName = _.camelCase(tableData[i][0].table_name)
     let tableUpper = _.upperFirst(tableName)
-    codeResolver += `    ${tableName}: resolveQuery('${tableName}'),\n`
+    codeResolver += `    ${tableName}: resolveQuery('${tableUpper}'),\n`
   }
   codeResolver += `  },\n}\n`
   codeResolver += `Object.assign(resolver.Query, customResolver)\n`

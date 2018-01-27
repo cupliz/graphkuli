@@ -22,7 +22,7 @@ function createMutationSchema(tableData) {
   for (var i = 0; i < tableData.length; i++) {
     let tableName = _.camelCase(tableData[i][0].table_name)
     let tableUpper = _.upperFirst(tableName)
-    codeResolver += `    ${tableName}: resolveMutation('${tableName}'),\n`
+    codeResolver += `    ${tableName}: resolveMutation('${tableUpper}'),\n`
   }
   codeResolver += `  },\n}\n`
   codeResolver += `Object.assign(resolver.Mutation, customResolver)\n`
