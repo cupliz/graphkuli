@@ -9,7 +9,8 @@ function createType(tableData) {
   let codeTypes = ``
   for (var i = 0; i < tableData.length; i++) {
     let rows = tableData[i]
-    let code = `const sdl = ${'`'}\n`
+    let code = `import {args} from '../query-schema'\n`
+    code += `const sdl = ${'`'}\n`
     let tableName = _.camelCase(rows[0].table_name)
     let tableUpper = _.upperFirst(tableName)
 
@@ -20,7 +21,7 @@ function createType(tableData) {
     code += `type ${tableUpper} {\n`
     for (let row of rows) {
       let colname = (row.column_key === 'PRI' && row.extra === 'auto_increment')?'id': _.camelCase(row.column_name)
-      code += `  ${colname}: ${getDataType(row.data_type)}${row.is_nullable=='YES'?'!':''}\n`
+      code += `  ${colname}: ${getDataType(row.data_type)}\n`
     }
     code += `}\n`
 
@@ -28,7 +29,7 @@ function createType(tableData) {
     code += `input ${tableUpper+'Input'} {\n`
     for (let row of rows) {
       let colname = (row.column_key === 'PRI' && row.extra === 'auto_increment') ? 'id' : _.camelCase(row.column_name)
-      code += `  ${colname}: ${getDataType(row.data_type)}${row.is_nullable=='YES'?'!':''}\n`
+      code += `  ${colname}: ${getDataType(row.data_type)}${row.is_nullable=='YES'?'':'!'}\n`
     }
     code += '}\n'
 

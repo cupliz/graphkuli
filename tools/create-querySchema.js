@@ -9,7 +9,7 @@ function createQuerySchema(tableData) {
   let codeResolver = ``
   code += `import { resolveQuery } from './_resolver'\n`
   code += `import { querySchema as customSchema, queryResolver as customResolver } from './custom-schema'\n`
-  code += `let args = 'id: Int, limit: Int, offset: Int, after: String, before: String, first: Int, last: Int, orderBy: String'\n`
+  code += `export let args = 'id: Int, limit: Int, offset: Int, after: String, before: String, first: Int, last: Int, orderBy: String'\n`
   codeQuery += 'let schema = `\ntype Query{\n'
   for (var i = 0; i < tableData.length; i++) {
     let tableName = _.camelCase(tableData[i][0].table_name)
