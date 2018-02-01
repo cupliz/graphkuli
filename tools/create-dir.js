@@ -21,6 +21,7 @@ function createConfig(config) {
   cfg['env'] = config['env']
   cfg['port'] = config['port']
   cfg['db'] = config['db']
+  cfg['auth'] = config['auth']
   code += JSON.stringify(cfg, null, 2)
   let outputConfig = path.resolve(path.join(config.outputDir, 'src', 'config.js'))
   fse.ensureFileSync(outputConfig)

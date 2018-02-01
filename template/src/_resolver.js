@@ -67,95 +67,115 @@ function getQueryArgs(query, args, typeData) {
     query = query.limit(limit)
 
     if (args.hasOwnProperty('filter')) {
-      argsFilter(query, args.filter)
+      argsFilter(query, args.filter, typeData.aliases)
     }
   }
 }
 
-function orArgs(query, array) {
-  for (let val of array) {
-    argsFilter(query, val, 'OR')
-  }
-}
-
-function andArgs(query, array) {
-  for (let val of array) {
-    argsFilter(query, val, 'AND')
-  }
-}
-
-function argsFilter(query, filter, op) {
+function argsFilter(query, filter, aliases) {
   let argsFilter = [];
   for (let key of Object.keys(filter)) {
     if (key.charAt(0) == '_') {
-      argsFilter.push(customOP(key, filter))
+      let cop_ = customOP(key, filter[key])
+      query.where(getAlias(aliases,cop_.a), cop_.b, cop_.c)
     } else {
       switch (key) {
         case "AND":
-          andArgs(query, filter.AND)
+          andArgs(query, filter.AND, aliases)
           break
         case "OR":
-          orArgs(query, filter.OR)
+          orArgs(query, filter.OR, aliases)
           break
         default:
-          query.where(key, filter[key])
+          query.where(getAlias(aliases,key), filter[key])
           break
       }
     }
   }
-  if (argsFilter) {
-    if (op == "OR") {
-      query.where(function() {
-        for (let val of argsFilter) {
-          this.orWhere(val.a, val.b, val.c)
+}
+
+function andArgs(query, array, aliases) {
+  let data = array[0]
+  query.where(function() {
+    query = this
+    for (let key of Object.keys(data)) {
+      if (Array.isArray(data[key])) {
+        checkOP(query, key, data[key], aliases)
+      } else {
+        if (key.charAt(0) == '_') {
+          let cop = customOP(key, data[key])
+          query.andWhere(getAlias(aliases,cop.a), cop.b, cop.c)
+        } else {
+          query.andWhere(getAlias(aliases,key), data[key])
         }
-      })
-    } else if (op == "AND") {
-      query.where(function() {
-        for (let val of argsFilter) {
-          this.andWhere(val.a, val.b, val.c)
-        }
-      })
-    } else {
-      query.where(function() {
-        for (let val of argsFilter) {
-          this.andWhere(val.a, val.b, val.c)
-        }
-      })
+      }
     }
+  })
+}
+
+function orArgs(query, array, aliases) {
+  let data = array[0]
+  query.where(function() {
+    query = this
+    for (let key of Object.keys(data)) {
+      if (Array.isArray(data[key])) {
+        checkOP(query, key, data[key], aliases)
+      } else {
+        if (key.charAt(0) == '_') {
+          let cop = customOP(key, data[key])
+          query.orWhere(getAlias(aliases,cop.a), cop.b, cop.c)
+        } else {
+          query.orWhere(getAlias(aliases,key), data[key])
+        }
+      }
+    }
+  })
+}
+
+function checkOP(query, key, val, aliases) {
+  switch (key) {
+    case "AND":
+      andArgs(query, val, aliases)
+      break
+    case "OR":
+      orArgs(query, val, aliases)
+      break
+    default:
+      andArgs(query, val, aliases)
+      break
   }
 }
 
-function customOP(key, array) {
+function customOP(key, obj) {
   let a, b, c
   a = key.substr(1)
-  if ('like' in array[key]) {
+  if ('like' in obj) {
     b = 'like'
-    c = `%${array[key].like}%`
+    c = `%${obj.like}%`
   }
-  if ('gt' in array[key]) {
+  if ('gt' in obj) {
     b = '>'
-    c = array[key].gt
+    c = obj.gt
   }
-  if ('gte' in array[key]) {
+  if ('gte' in obj) {
     b = '>='
-    c = array[key].gte
+    c = obj.gte
   }
-  if ('lt' in array[key]) {
+  if ('lt' in obj) {
     b = '<'
-    c = array[key].lt
+    c = obj.lt
   }
-  if ('lte' in array[key]) {
+  if ('lte' in obj) {
     b = '<='
-    c = array[key].lte
+    c = obj.lte
   }
-  if ('in' in array[key]) {
+  if ('in' in obj) {
     b = 'in'
-    c = array[key].in.split(',')
+    c = obj.in.split(',')
   }
-  if ('notin' in array[key]) {
+  if ('notin' in obj) {
     b = 'not in'
-    c = array[key].notin.split(',')
+    c = obj.notin.split(',')
   }
   return { a, b, c }
 }

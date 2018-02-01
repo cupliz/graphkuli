@@ -7,7 +7,7 @@ const con_local = {
 let config = {
   env: 'dev',
   outputDir: 'output',
-  port: 4000,
+  port: 5000,
   dbFile: './mydb.sqlite',
   pgSchema: ['pg_catalog', 'pg_statistic', 'information_schema'],
   db: {
@@ -15,5 +15,9 @@ let config = {
     connection: con_local,
     pool: { min: 0, max: 7 }
   },
+  auth: {
+    login: 'admin',
+    password: 'admin'
+  }
 }
 module.exports = config
