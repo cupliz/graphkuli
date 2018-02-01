@@ -20,7 +20,7 @@ const schema = makeExecutableSchema({
 const app = express()
 app.set('port', process.env.PORT || config.port)
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
-app.use('/', basicAuth, cors(), expressGraphQL({
+app.use('/', cors(), basicAuth, expressGraphQL({
   schema: schema,
   graphiql: true,
 }))
