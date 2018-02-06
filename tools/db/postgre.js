@@ -5,6 +5,7 @@ var postgre = knex({
   version: '7.2',
   connection: config.dbCon
 })
+const pgSchemas = ['pg_catalog', 'pg_statistic', 'information_schema']
 
 module.exports = {
   con: postgre,

@@ -1,20 +1,25 @@
 {
   "name": "graphkuli",
   "version": "0.1.9",
-  "description": "GraphQL custom framework",
+  "description": "Instant GraphQL API for existing database",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
+  "bin": {
+    "graphkuli": "./index.js"
+  },
   "author": "Iyan Cupliz",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.6.0",
+    "commander": "^2.13.0",
     "fs-extra": "^5.0.0",
+    "inquirer": "^5.1.0",
     "knex": "^0.14.2",
     "lodash": "^4.17.4",
     "mysql": "^2.15.0",
     "pg": "^7.4.1",
-    "sqlite3": "^3.1.13"
+    "sqlite3": "^3.1.13",
+    "yargs": "^11.0.0"
   }
 }
