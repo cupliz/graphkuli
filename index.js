@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 const _ = require('lodash')
 const fse = require('fs-extra')
 const config = require('./tools/cli')
