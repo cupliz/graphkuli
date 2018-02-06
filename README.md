@@ -27,6 +27,31 @@ $ npm install
 $ npm start
 ```
 
+### Query
+Basically, there is 2 type of output in GraphQL, Object and List. GraphKuli is simply using one endpoint to cover both of query.
+
+This query returns a list of data.
+```
+{
+  article{
+    id
+    title
+    active
+  }
+}
+```
+
+And this returns a single object.
+```
+{
+  article(id:6){
+    id
+    title
+    active
+  }
+}
+```
+
 ### Filtering
 For filtering purpose, use `filter` argument. For a custom operator, use `_` notation in front of the arguments.
 Query:
@@ -38,13 +63,13 @@ Query:
     active:1
   }){
     id
-    user
     title
     active
+  }
 }
 ```
 
-Nested filtering:
+### Nested filtering:
 
 You can do nested filtering like this
 
@@ -65,11 +90,10 @@ Query:
           _title:{in:"i"},
           active: 1,
         }
-    }
+      }
     }
   }){
     id
-    user
     title
     active
   }
@@ -93,7 +117,6 @@ Operator:
 {
   article(limit:5,offset:2, orderBy:"id_desc"){
     id
-    user
     title
     active
   }
@@ -113,7 +136,6 @@ mutation {
     active: 1
   }){
     id
-    user
     title
     active
   }
@@ -130,7 +152,6 @@ mutation {
     active: 1
   }){
     id
-    user
     title
     active
   }
@@ -142,7 +163,6 @@ Or Delete:
 mutation {
   article(do:"delete", id:10){
     id
-    user
     title
     active
   }
