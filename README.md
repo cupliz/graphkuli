@@ -15,16 +15,7 @@ GraphKuli is a GraphQL framework to generate API from Database using GraphQL lan
 
 You can also:
   - Remove and replace basic auth with your favourite auth library
-  - 
 
-
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
 
 ### Installation
 Graphkuli is available as the `graphkuli` package on npm
@@ -38,6 +29,7 @@ $ npm start
 
 ### Filtering
 For filtering purpose, use `filter` argument. For a custom operator, use `_` notation in front of the arguments.
+Query:
 ```
 {
   article(filter:{
@@ -53,9 +45,12 @@ For filtering purpose, use `filter` argument. For a custom operator, use `_` not
 ```
 
 Nested filtering:
-```
-(title LIKE '%al%' AND user>2 AND (title IN ('i') OR active=1)) OR user=7
-```
+
+You can do nested filtering like this
+
+>(title LIKE '%al%' AND user>2 AND (title IN ('i') OR active=1)) OR user=7
+
+using query like this.
 
 Query:
 ```
@@ -97,6 +92,55 @@ Operator:
 ```
 {
   article(limit:5,offset:2, orderBy:"id_desc"){
+    id
+    user
+    title
+    active
+  }
+}
+```
+
+### Mutations
+
+Creating new data is easy as this. 
+
+```
+mutation {
+  article(do:"create",input:{
+    id: 10,
+    user: 2,
+    title: "Create new article",
+    active: 1
+  }){
+    id
+    user
+    title
+    active
+  }
+}
+```
+
+Or Update:
+```
+mutation {
+  article(do:"update", id:10, input:{
+    id: 11,
+    user: 3,
+    title: "Update existing data",
+    active: 1
+  }){
+    id
+    user
+    title
+    active
+  }
+}
+```
+
+Or Delete:
+```
+mutation {
+  article(do:"delete", id:10){
     id
     user
     title
