@@ -171,6 +171,9 @@ mutation {
 
 
 ### Upcoming Features
+- join-monster []
+- Add example
+- Add demo
 - Support relation database postgre[soon], sqlite[soon]
 - Support non-relational database [soon]
 - Convert single table [soon]
