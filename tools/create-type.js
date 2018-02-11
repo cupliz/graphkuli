@@ -40,7 +40,7 @@ function createType(tableData) {
     for (let row of rows) {
       let colname = (row.column_key === 'PRI' && row.extra === 'auto_increment')?'id': _.camelCase(row.column_name)
       code += `  ${colname}: ${getDataType(row.data_type)}\n`
-      code += `  _${colname}: QueryOperator\n`
+      code += `  _${colname}: QOP\n`
     }
     code += `}`
     code += '`\nexport default sdl\n\n'

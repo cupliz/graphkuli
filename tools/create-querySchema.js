@@ -7,7 +7,7 @@ function createQuerySchema(tableData) {
   let code = ``
   let codeQuery = ``
   let codeResolver = ``
-  code += `import { resolveQuery } from './_resolver'\n`
+  code += `import { resolveQuery } from '../core/resolver'\n`
   code += `import { querySchema as customSchema, queryResolver as customResolver } from './custom-schema'\n`
   code += `export let args = 'id: Int, limit: Int, offset: Int, after: String, before: String, first: Int, last: Int, orderBy: String'\n`
   codeQuery += 'let schema = `\ntype Query{\n'
@@ -16,9 +16,7 @@ function createQuerySchema(tableData) {
     let tableUpper = _.upperFirst(tableName)
     codeQuery += `  ${tableName}(${'${args}'}, filter: ${tableUpper+'Filter'}): [${tableUpper}]\n`
   }
-  codeQuery += `}\ninput QueryOperator{`
-  codeQuery += `\n  like: String\n  lt: String\n  lte: String\n  gt: String\n  gte: String\n  in: String\n  notin: String\n`
-  codeQuery += `}${'` + customSchema'}\n`
+  codeQuery += `}\n${'` + customSchema'}\n`
 
   codeResolver += `let resolver = {\n`
   codeResolver += `  Query: {\n`

@@ -7,15 +7,15 @@ function createMutationSchema(tableData) {
   let code = ``
   let codeQuery = ``
   let codeResolver = ``
-  code += `import { resolveMutation } from './_resolver'\n`
+  code += `import { resolveMutation } from '../core/resolver'\n`
   code += `import { mutationSchema as customSchema, mutationResolver as customResolver } from './custom-schema'\n`
   codeQuery += 'let schema = `\ntype Mutation{\n'
   for (var i = 0; i < tableData.length; i++) {
     let tableName = _.camelCase(tableData[i][0].table_name)
     let tableUpper = _.upperFirst(tableName)
-    codeQuery += `  ${tableName}(id: ID, do: String, input: ${tableUpper}Input): ${tableUpper}\n`
+    codeQuery += `  ${tableName}(id: ID, do: MDO, input: ${tableUpper}Input): ${tableUpper}\n`
   }
-  codeQuery += `}${'` + customSchema'}\n`
+  codeQuery += `}\n${'` + customSchema'}\n`
 
   codeResolver += `let resolver = {\n`
   codeResolver += `  Mutation: {\n`
