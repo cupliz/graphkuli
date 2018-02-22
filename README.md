@@ -175,7 +175,7 @@ mutation {
 * [ ] Add demo [soon]
 * [ ] join-monster
 * [ ] MySQL relationship [soon]
-* [ ] Support non-relational database: dynamoDB [soon]
+* [ ] Support non-relational database: dynamoDB [soon], mongoDB, redis
 * [ ] Support relation database postgre, sqlite
 * [ ] Convert single table
 * [ ] Pagination with pointer
