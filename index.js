@@ -17,11 +17,12 @@ if (Object.keys(config).length) {
       tableStructure.push(db.getTableStructure(tableName))
     }
     Promise.all(tableStructure).then(function(data) {
-      createDir()
-      createQuerySchema(data)
-      createMutationSchema(data)
-      createType(data)
-      createMap(data)
+      console.log(data)
+      // createDir()
+      // createQuerySchema(data)
+      // createMutationSchema(data)
+      // createType(data)
+      // createMap(data)
       db.close()
       console.log(`Done! To start your Graphkuli API:\n$ cd ${config.outputDir}\n$ npm install\n$ npm start`)
     }).catch(err => {
