@@ -171,15 +171,15 @@ mutation {
 
 ### Upcoming Features
 * [x] CLI
-* [] Add example [soon]
-* [] Add demo [soon]
-* [] join-monster
-* [] MySQL relationship [soon]
-* [] Support non-relational database: dynamoDB [soon]
-* [] Support relation database postgre, sqlite
-* [] Convert single table
-* [] Pagination with pointer
-* [] Update schema on database schema changed
+* [ ] Add example [soon]
+* [ ] Add demo [soon]
+* [ ] join-monster
+* [ ] MySQL relationship [soon]
+* [ ] Support non-relational database: dynamoDB [soon]
+* [ ] Support relation database postgre, sqlite
+* [ ] Convert single table
+* [ ] Pagination with pointer
+* [ ] Update schema on database schema changed
 
 License
 ----
