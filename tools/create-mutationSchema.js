@@ -1,9 +1,8 @@
 const _ = require('lodash')
 const path = require('path')
 const fse = require('fs-extra')
-const config = require('../config')
 
-function createMutationSchema(tableData) {
+function createMutationSchema(config, tableData) {
   let code = ``
   let codeQuery = ``
   let codeResolver = ``

@@ -169,17 +169,16 @@ mutation {
 }
 ```
 
+
 ### Upcoming Features
-* [x] CLI
-* [ ] Add example [soon]
-* [ ] Add demo [soon]
-* [ ] join-monster
-* [ ] MySQL relationship [soon]
-* [ ] Support non-relational database: dynamoDB [soon], mongoDB, redis
-* [ ] Support relation database postgre, sqlite
-* [ ] Convert single table
-* [ ] Pagination with pointer
-* [ ] Update schema on database schema changed
+- join-monster []
+- Add example
+- Add demo
+- Support relation database postgre[soon], sqlite[soon]
+- Support non-relational database [soon]
+- Convert single table [soon]
+- Pagination with pointer [soon]
+- Update schema on database schema changed [soon]
 
 License
 ----

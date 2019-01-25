@@ -1,10 +1,9 @@
 const _ = require('lodash')
 const path = require('path')
 const fse = require('fs-extra')
-const config = require('../config')
 const getDataType = require('./data-type')
 
-function createType(tableData) {
+function createType(config, tableData) {
   let codeIndex = ``
   let codeTypes = ``
   for (var i = 0; i < tableData.length; i++) {

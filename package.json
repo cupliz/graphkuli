@@ -1,6 +1,6 @@
 {
   "name": "graphkuli",
-  "version": "0.1.14",
+  "version": "0.2.0",
   "description": "Instant GraphQL API for existing database",
   "main": "index.js",
   "preferGlobal": true,
@@ -14,13 +14,14 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.13.0",
-    "fs-extra": "^5.0.0",
-    "inquirer": "^5.1.0",
-    "knex": "^0.14.2",
+    "fs-extra": "^7.0.1",
+    "inquirer": "^6.2.1",
     "lodash": "^4.17.4",
     "mysql": "^2.15.0",
+    "mysql2": "^1.6.4",
     "pg": "^7.4.1",
-    "sqlite3": "^3.1.13"
+    "sequelize": "^4.42.0",
+    "sqlite3": "^4.0.6"
   },
   "devDependencies": {},
   "repository": {
