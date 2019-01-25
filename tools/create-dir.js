@@ -1,8 +1,7 @@
 const path = require('path')
 const fse = require('fs-extra')
-const config = require('../config')
 
-function createDir() {
+function createDir(config) {
   let code = JSON.stringify(config, null, 2)
   let templateDir = path.resolve(__dirname,'../template')
   // fse.removeSync( path.resolve(config.outputDir,'src','type'))

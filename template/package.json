@@ -1,7 +1,7 @@
 {
   "name": "graphkuli",
-  "version": "0.1.23",
-  "description": "Instant GraphQL coffee from your existing SQL database",
+  "version": "0.2.0",
+  "description": "Instant GraphQL from existing SQL database",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

@@ -1,9 +1,8 @@
 const _ = require('lodash')
 const path = require('path')
 const fse = require('fs-extra')
-const config = require('../config')
 
-function createMap(tableData) {
+function createMap(config, tableData) {
   let structure = {}
   let code = ``
   for (var i = 0; i < tableData.length; i++) {

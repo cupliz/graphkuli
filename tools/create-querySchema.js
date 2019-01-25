@@ -1,9 +1,8 @@
 const _ = require('lodash')
 const path = require('path')
 const fse = require('fs-extra')
-const config = require('../config')
 
-function createQuerySchema(tableData) {
+function createQuerySchema(config, tableData) {
   let code = ``
   let codeQuery = ``
   let codeResolver = ``
